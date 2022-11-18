@@ -20,11 +20,17 @@ public class BankStatementAnalyzerSimple {
         BankStatementProcessor bankStatementProcessor = new BankStatementProcessor(bankTransactions);
         System.out.println("The total for all transactions is " +
                 bankStatementProcessor.calculateTotalAmount());
-        System.out.println("Transaction greater than 1000 and occurred in february " +
-                bankStatementProcessor.findTransaction(bankTransaction
+        System.out.println("Transaction greater than 1000 and occurred in february:");
+        final List<BankTransaction> transactions =  bankStatementProcessor.findTransaction(bankTransaction
                 ->
                 bankTransaction.getDate().getMonth() == Month.FEBRUARY &&
-                        bankTransaction.getAmount() >= 1000));
+                        bankTransaction.getAmount() >= 1000);
+
+        for (final BankTransaction transaction:transactions) {
+            System.out.println(transaction.getDate() + " " + transaction.getAmount() + " " + transaction.getDescription());
+        }
+
+
         collectSummary(bankStatementProcessor);
 
     }
